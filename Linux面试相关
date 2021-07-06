@@ -1,1 +1,31 @@
-
+@Lzy
+Date:2021.7.6 21:00
+----------------------------------
+1.Linux下查看大容量的文件
+  df -h
+  du 
+2.如何查看日志文件中的某个字符串个数
+  awk或者grep命令
+  awk是一个数据处理工具，
+3.linux离开系统or注销Linux
+  # exit
+4.linux下命令执行方式
+  命令  -选项  参数1  参数2
+  # command 【-options】 parameter1 parameter2
+  重要概念：第一个被输入的字符一定是命令或可执行的文件
+5.显示日期与时间的命令：date     
+  # date +%Y/%m/%d   or
+  # date +%H/%M
+  显示日历的命令：cal
+  # cal [month] [year]
+  计算器：bc
+  注意：离开bc命令行界面，需要输入【quit】离开bc的软件环境
+6.重要的热键
+  【Tab】
+  tab 接在一串命令的第一个字段后面，则为【命令补全】；
+  tab 接在一串命令的第二个字段后面，则为【文件补全】；
+  如果Centos7.X版本安装了Bash_completion软件，则在某些命令后面使用【tab】按键时，可以进行【选项/参数】的补齐；
+  【Ctrl+C】
+  
+  【Ctrl+D】
+  
