@@ -181,6 +181,22 @@ Date:2021.7.12 11:11
     -l，输出后面接的装置所有的分区内容。若仅有fdisk -l时，则系统将会把整个系统内查询的装置的分区均列出来；
   mount/umount：用于磁盘挂载/卸载
     
+14:yum（yellow dog updater）shell前端软件包管理器
+  基于rpm包管理，能够从指定的服务器自动下载rpm包并安装。可一次安装所有依赖的软件包
+  yum语法：
+    yum [options] [command] [package...]
+    options：可选 -y（安装过程提示选择全部为‘yes’）     -q（不显示安装过程）
+    command：要进行的操作
+    package：安装的包名
+  常用命令：
+    yum check-update，列出所有可更新的软件清单命令；
+    yum update，更新所有的软件命令；
+    yum install <package_name>，仅安装指定软件；
+    yum update <package_name>，仅更新指定软件；
+    yum list，列出所有可安装的软件清单；
+    yum remove <package_name>，删除软件包命令；
+    yum search <keyword>，查找软件包；
+    yum clean packages，清除缓存目录下的软件包；
     
 
 
