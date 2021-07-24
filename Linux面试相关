@@ -248,9 +248,12 @@ linux创建文件可直接通过文件编辑器vi/vim创建
   which，查找命令的完整文件名
   # which ls ，找出ls这个命令的完整文件名
   该命令是根据【path】这个环境变量所规范的路径，去查找执行文件的文件名
+  如果该命令是bash命令，通过which无查询结果
   
+  查找文件
+  优先级whereis > locate > find
+  whereis只找系统中某些特定目录下面的文件而已；locate是利用数据库来查找文件名；find则是直接查找磁盘；
   
- 
 20.bash shell的功能
   *历史命令（history）
   记录使用过的命令。历史命令都存放在家目录的.bash_history，可查询曾经做过的操作
@@ -259,7 +262,7 @@ linux创建文件可直接通过文件编辑器vi/vim创建
   *通配符（wildcard/*）
   展开/usr/bin下所有以X开头的文件： # ls -al /usr/bin/X*
   
-    
+21.
     
     
     
