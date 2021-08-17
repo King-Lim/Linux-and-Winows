@@ -401,6 +401,41 @@ linux创建文件可直接通过文件编辑器vi/vim创建
     -w：仅列出多少字（英文单字）；
     -m：多少字符
     
+30.字符串转换命令：tr，col，join，paste，expand
+  tr用来删除一段讯息当中的文字，或者是进行文字讯息的替换
+  # tr 【-ds】set1
+    -d：删除讯息当中的‘set1’这个字符串；
+    -s：取代掉重复的字符；
+    实例1：将/tmp/test0804/test1文件中显示的信息，小写字符全部转为大写字符
+      # cat /tmp/test0804/test1 | tr '[a-z]' '[A-Z]'
+    实例2：将/tmp/test0804/test1文件中显示的信息，‘root’字符全部删掉
+      # cat /tmp/test0804/test1 | tr -d 'root'
+  # col [-x]
+    -x：将tab键转换成对等的空格键
+      实例：
+        # cat -A /etc/man.config
+        # cat /etc/man.config | col -x | cat -A | more
+  join 处理俩文件中，有‘相同数据’的一行，将其相加
+  # join [-ti12] file1 file2
+    -t：预设以空格符分隔数据，并且比对【第一个字段】的数据；
+    -i：忽略大小写的差异；
+    -1：表示【第一个文件要用那个字段来分析】；
+    -2：表示【第二个文件要用那个字段来分析】；
+  paste 将两行贴在一起，且中间以[tab]键隔开
+  # paste [-d] file1 file2
+    -d：后面可以接分隔字符，预设是以【tab】来分隔的；
+    -：如果file部分写成-，表示来自standard input的资料；
+  expand 将【tab】键转换成空格键
+  # expand [-t] file
+    -t：后面可接数字。一般来说，一个【tab】键可用8个空格键取代
+    
+        
+        
+    
+    
+    
+    
+    
       
   
   
