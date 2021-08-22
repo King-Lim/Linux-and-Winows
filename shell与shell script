@@ -1,0 +1,13 @@
+1.关于vim的报错
+# vim /tmp/vitest/man_db.conf
+  E325：ATTENTION
+  ......
+  [O]pen Read-Only,[E]dit anyway,[R]cover,[D]elete it,[Q]uit,[A]bort
+    【[O]pen Read-Only】打开文件成为只读文件
+    【[E]dit anyway】正常打开你要编辑的那个文件，不会加载缓存内容；但是多个用户可能会互相改变对方编辑结果；
+    【[R]cover】加载缓存内容，就是救回之前未保存的工作；当文件找回并退出vim之后，需要手动删除swap缓存文件；
+    【[D]elete it】删除该缓存（当你确认无用后）；
+    【[Q]uit】退出vim，不进行任何操作；
+    【[A]bort】忽略编辑操作，与quit类似；
+    
+2.
