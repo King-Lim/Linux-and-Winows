@@ -3,11 +3,11 @@
     寻找/etc/passwd里面是否有这个账号；没有就跳出，有的话将对应UID（User ID）与GID（Group ID）读出来；
     核对密码表，linux进入/etc/shadow找出对应的UID；
     shell控管阶段
-  /etc/passwd
-    *root:x:0:0:root:/root:/bin/bash
-    *bin:x:1:1:bin:/bin:/sbin/nologin
-    *daemon"x:2:2:daemon:/sbin:/sbin/nologin
-    *adm:x:3:4:adm:/var/adm:/sbin/nologin
+  /etc/passwd，[权限-rw-r--r--]
+    root:x:0:0:root:/root:/bin/bash
+    bin:x:1:1:bin:/bin:/sbin/nologin
+    daemon"x:2:2:daemon:/sbin:/sbin/nologin
+    adm:x:3:4:adm:/var/adm:/sbin/nologin
     ...
       【输出以[:]隔开，详解】
       <1>账号名称，对应UID用；例如root就是预设的系统管理员账号名称；
@@ -23,5 +23,42 @@
       <5>User信息说明栏；
       <6>User的家目录；登陆之后即会进入该指定的目录，可支持修改；
       <7>shell，指该User账号使用哪个shell进行指令下达，也可支持修改；当shell为/sbin/nologin，表示该User禁止登录；
-  /etc/shadow
+  /etc/shadow，[权限----------]
+    root:$1$i9Ejldjfjio389u9sjl$jljsoi45QE/:12959:0:99999:7::: 
+    bin:*:12959:0:99999:7::: 
+    daemon:*:12959:0:99999:7::: 
+    adm:*:12959:0:99999:7:::
+    ...
+      【输出以[:]隔开，详解】
+      <1>账号名称，与/etc/passwd同理；
+      <2>密码，经过编码的密码；如果显示[*/!]，表示这个账号不允许登录，如果想禁止某账号登录，只需要在/etc/shadow中，将密码改为*/!即可；
+      <3>最近改动密码的时间；Linux的时间以1970年1月1日为1；  
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
