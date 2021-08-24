@@ -1,1 +1,17 @@
-
+1.linux的账号与群组
+  登入linux获取UID或GID
+    寻找/etc/passwd里面是否有这个账号；没有就跳出，有的话将对应UID（User ID）与GID（Group ID）读出来；
+    核对密码表，linux进入/etc/shadow找出对应的UID；
+    shell控管阶段
+  /etc/passwd
+    *root:x:0:0:root:/root:/bin/bash
+    *bin:x:1:1:bin:/bin:/sbin/nologin
+    *daemon"x:2:2:daemon:/sbin:/sbin/nologin
+    *adm:x:3:4:adm:/var/adm:/sbin/nologin
+    ...
+      【输出以[:]隔开，详解】
+      <1>账号名称，对应UID用；例如root就是预设的系统管理员账号名称；
+      <2>密码x，现版本linux已将密码移动至shadow这个加密文件中；
+      <3>UID，使用者识别码
+        0，代表账号为系统管理员；如果想要让另一个账号变为系统管理员，只需将UID改为0即可（慎用）；
+        1~499，
