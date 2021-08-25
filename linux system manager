@@ -48,10 +48,32 @@
     daemon:x:2:root,bin,daemon 
     sys:x:3:root,bin,adm
     ...
+      <1>群组名称；
+      <2>群组密码，同样密码也是记录在/etc/gshadow当中；
+      <3>GID,群组ID；
+      <4>支持的账号名称；
+  /etc/gshadow，[权限----------]
+    root:::root 
+    bin:::root,bin,daemon 
+    daemon:::root,bin,daemon 
+    sys:::root,bin,adm
+    ...
+      <1>群组名称；
+      <2>密码栏；同样，开头为！表示无法登入；
+      <3>群组管理员的账号；
+      <4>该群组的所属账号；
       
-    
-    
-  
+2.账号的管理（新增、删除）
+  新增与移除User：useradd 
+    -u：后面接的是UID，是一组数字。直接指定一个特定的UID给这个账号；
+    -g：后面接initial_group，该GID会放置到/etc/passwd的第四个字段内；
+    -G：后面接可支持的Other_group，该参数会修改/etc/group内的相关资料；
+    -M：强制！不要建立User家目录；
+    -m：强制！建立User家目录；
+    -c：/etc/passwd第五个字段的内容；
+    -d：指定某个目录成为家目录，而不要使用默认值；
+    -r：建立一个系统账号，这个账号的UID会有限制（/etc/login.defs）；
+    -s：后面接一个shell，预设是/bin/bash；
       
     
 
