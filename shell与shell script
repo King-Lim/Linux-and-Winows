@@ -107,11 +107,22 @@
      当加载另一个shell（即启动子进程，而离开原本父进程），子shell可将父shell的环境变量所在内存区域导入到自己的环境变量区块中
      
 8.变量键盘读取、数组与声明
-  read
-    读取来自键盘的输入变量；用于shell脚本编写中，与用户交互
+  *命令：[read],读取来自键盘的输入变量；用于shell脚本编写中，与用户交互
     # read [-pt] variable
       -p：后面可接提示字符
       -t：后面可接等待的秒数
+    示例：[root@Lzy ~]# read -p "Please input your variable:" -t 30 name
+  *命令：[declare,typeset]，声明变量的类型
+    # declare [-aixr] variable
+      -a：将后面的变量类型定义为数组（array）类型
+      -i：将后面的变量类型定义为整数（integer）类型
+      -x：用法与export一样，将后面的variable设置成环境变量
+      -r：将变量设置成readonly类型，该变量不可被更改内容，也不可能unset
+      【默认情况下，bash对变量有几个基本的定义：
+      <1>变量类型默认为字符串；
+      <2>bash环境下的数值运算，默认最多能到达整数形态，即1/3的结果为0】
+      
+9.    
     
         
         
