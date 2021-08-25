@@ -74,7 +74,12 @@
     -d：指定某个目录成为家目录，而不要使用默认值；
     -r：建立一个系统账号，这个账号的UID会有限制（/etc/login.defs）；
     -s：后面接一个shell，预设是/bin/bash；
-      
+    对账号进行管理的过程中，会改动的地方有：
+      /etc/passwd
+      /etc/shadow
+      /etc/group
+      /etc/gshadow
+      /home/username
     
 
 
