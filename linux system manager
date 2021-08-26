@@ -63,8 +63,8 @@
       <3>群组管理员的账号；
       <4>该群组的所属账号；
       
-2.账号的管理（新增、删除）
-  新增与移除User：useradd 
+2.账号的管理（新增、修改、删除）
+  新增User：useradd 
     -u：后面接的是UID，是一组数字。直接指定一个特定的UID给这个账号；
     -g：后面接initial_group，该GID会放置到/etc/passwd的第四个字段内；
     -G：后面接可支持的Other_group，该参数会修改/etc/group内的相关资料；
@@ -80,6 +80,39 @@
       /etc/group
       /etc/gshadow
       /home/username
+  修改User：usermod【root系统管理员指令】
+    # usermod [-cdegGlsuLU] username
+      -c ：后面接账号的说明，即 /etc/passwd 第五栏的说明栏，可以加入一些账号的说明。 
+      -d ：后面接账号的家目录，即修改 /etc/passwd 的第六栏； 
+      -e ：后面接日期，格式是 YYYY-MM-DD 也就是在 /etc/shadow 内的第八个字段数据啦！ 
+      -g ：后面接 group name，修改 /etc/passwd 的第四个字段，亦即是 GID 的字段！ 
+      -G ：后面接 group name，修改这个使用者能够支持的群组，修改的是 /etc/group 啰～ 
+      -l ：后面接账号名称。亦即是修改账号名称， /etc/passwd 的第一栏！ 
+      -s ：后面接 Shell 的实际档案，例如 /bin/bash 或 /bin/csh 等等。 
+      -u ：后面接 UID 数字啦！即 /etc/passwd 第三栏的资料； 
+      -L ：暂时将使用者的密码冻结，让他无法登入。其实仅改 /etc/shadow 的密码栏。 
+      -U ：将 /etc/shadow 密码栏的 ! 拿掉，解冻啦！
+  删除User：userdel
+    # userdel [-r] username
+    -r：连同使用者的家目录一并删除
+    【userdel是删除该用户在主机上的任何数据；
+    如果用户已经使用过一段时间，先以find / -user username查出整个系统的相关文件，再加以删除吧】
+      
+3.passwd
+  # passwd [-kdluefxnwiS] username
+  具体参数含义 passwd --help查看
+  【重点：passwd更改密码有用户之分，即root用户与普通用户之分】
+
+4.账号的切换su、sudo
+  # su [-lcm] username
+  -：执行su -时，表示该user要变换身份为root，且切换后使用root的环境设定参数
+  -l：使用变换身份后的所有相关环境设定
+  -m：-m与-p一样；表示使用当前环境设定，不使用变换身份后的环境设定
+  -c：后面可接指令
+  # sudo 切换用户与/etc/sudoers文件有关
+    可使用visudo查看配置
+    
+5.    
     
 
 
