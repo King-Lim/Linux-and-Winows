@@ -130,7 +130,66 @@
     
 6.
 
-
+7.程序与可执行文件
+  工作管理（job control）：指的是在同一个终端下面的工作界面管理
+    【进行工作管理的行为中，其实每个工作都是目前bash的子程序，即彼此之间是有关联性的；
+      无法以job control的方式，在tty1的环境去管理tty2的bash；
+      总之，要进行bash的job control必须有两个限制：
+        程序必须来自是shell的children process；
+        程序不能等待terminal/shell的输入（input）；
+    】
+    *&：将指令丢到背景执行
+      实例：tar -zpvf /tmp/etc.tar.gz /etc &
+      [1] 24874    会生成[job number] PID
+      终端可继续作业，不受tar命令影响，该指令的执行转至background；
+      |注意：在background中执行指令，如果有stdout及stderr时，数据依旧会打印输出到屏幕；
+       可用数据重定向传至某个文件，即可无数据打印输出；
+    *Ctrl-z：将当前工作放到background中暂停
+      stdout:示例
+      [1]+  Stopped           vim ~/.bashrc
+      [1]表示这是第一个任务
+      +表示最近一个被丢到后台的任务，且是后台默认会被使用的那个任务（只有默认任务，即带＋号的任务，fg时，才会被拿到前台）
+      Stopped表示当前此任务的状态（Ctrl-z的任务基本都是暂停的）
+    *jobs
+      查看当前的后台任务状态
+      # jobs [-lrs]
+      -l：除了列出job number与命令串之外，还会列出PID的号码；
+      -r：仅列出后台正在run的进程；
+      -s：仅列出后台中暂停（stop）的进程；      
+    *fg：将后台任务拿到前台处理
+      # fg %jobnumber
+    *bg：让任务在后台下的状态变成运行中      
+    *kill：管理后台当中的任务
+      # kill -signal %jobnumber
+      signal：代表给予后面任务什么样的指示，详情man 7 signal
+        -1：重新读取一次参数的配置文件（类似于reload）
+        -2：代表由键盘输入[Ctrl-c]同样的内容
+        -9：立即强制删除一个任务
+        -15：以正常的进程方式终止一个任务，与-9不同
+  脱机管理问题
+    任务管理的后台与终端有关
+    nohup实现终端脱机或注销后，任务继续执行
+      nohup [命令与参数]         任务在终端前台
+      nohup [命令与参数] &       任务在终端后台
+  进程管理   
+    ps：查看进程
+      # ps aux        查看系统所有进程
+      # ps -lA        查看系统所有进程
+      # ps axjf       连同部分进程树状态
+      【主要使用两个：
+        查看自己bash进程的       # ps -l
+        查看所有系统运行的进程   # ps aux
+       】
+    top：动态查看进程的变化
+      【相较于ps选取一个时间点的进程状态，top则可以持续监测进程运行状态】
+      在top执行过程中可以使用的按键命令
+        ?：显示在top中可以输入的案件命令
+        P：以CPU的使用排序显示
+        M：以Memory的使用排序显示
+        N：以PID来排序
+        q：退出top
+  pstree
+        
 
 
 
