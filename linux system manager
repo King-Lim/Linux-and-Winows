@@ -112,8 +112,23 @@
   # sudo 切换用户与/etc/sudoers文件有关
     可使用visudo查看配置
     
-5.    
+5.【习题】
+  *通过系统管理员对某一个账号暂时暂停使用，过一段时间后正常启用，如何设定？
+    将/etc/passwd的shell字段（第七个字段）写成/sbin/nologin，即可让该账号暂时无法登录；
+    将/etc/shadow内的密码字段，增加一个*号在最前面，这样该账号无法登录；（该方法在登陆时不会报错，会一直提示密码错误）
+    将/etc/shadow的第八个字段关于账号取消日期，设定小于当前日期，那么它将无法登录；
+  *使用useradd新增账号的时候，UID、GID以及相关密码控制，在哪个文件里设定的？
+    /etc/login.defs
+    /etc/default/useradd
+  *pwconv这个指令有什么功能？
+    pwconv可让passwd里面的账号，设定一份密码到/etc/shadow当中；（同步功能）
+  *如何设定，让使用useradd时，预设的家目录就是/account？
+    vim /etc/default/useradd
+    将HOME=/home 改为HOME=/account
+  *让账号Lzy加入test1、test2俩群组，如何操作？
+    usermod -G test1 test2 Lzy
     
+6.
 
 
 
