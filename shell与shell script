@@ -137,30 +137,7 @@
 10.变量内容的删除、取代与替换
   *变量内容的删除与替换
     
-11.程序与可执行文件
-  工作管理（job control）：指的是在同一个终端下面的工作界面管理
-    【进行工作管理的行为中，其实每个工作都是目前bash的子程序，即彼此之间是有关联性的；
-      无法以job control的方式，在tty1的环境去管理tty2的bash；
-      总之，要进行bash的job control必须有两个限制：
-        程序必须来自是shell的children process；
-        程序不能等待terminal/shell的输入（input）；
-    】
-    *&：将指令丢到背景执行
-      实例：tar -zpvf /tmp/etc.tar.gz /etc &
-      [1] 24874    会生成[job number] PID
-      终端可继续作业，不受tar命令影响，该指令的执行转至background；
-      |注意：在background中执行指令，如果有stdout及stderr时，数据依旧会打印输出到屏幕；
-       可用数据重定向传至某个文件，即可无数据打印输出；
-    *Ctrl-z：将当前工作放到background中
-      
-    fg
-    bg
-    kill
-    
-  ps
-  top
-  pstree
-        
+
         
         
     
