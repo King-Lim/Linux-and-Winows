@@ -127,8 +127,6 @@
     将HOME=/home 改为HOME=/account
   *让账号Lzy加入test1、test2俩群组，如何操作？
     usermod -G test1 test2 Lzy
-    
-6.
 
 7.程序与可执行文件
   工作管理（job control）：指的是在同一个终端下面的工作界面管理
@@ -196,30 +194,7 @@
     *kill与killall
       kill：后面必须加上PID（或%jobnumber），所以kill经常搭配ps，pstree等指令使用；
       killall：将系统当中所有以某个指令名称启动的程序全部删除；
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      
+8.
 
 
