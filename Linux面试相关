@@ -433,3 +433,14 @@ linux创建文件可直接通过文件编辑器vi/vim创建
   # split [-bl] file PREFIX
     -b：后面可接想要分割的档案大小，可加单位b，k，m等；
     -l：以行数来进行分割；      
+
+32.进程间通信的五种方式
+  进程间通信（Inter-Process Communication，简称IPC）是两个进程间进行信息交流的一种机制，不仅会发生在同一主机
+  的两个进程之间，还会发生在不同主机的两个进程之间。
+    *UNIX管道（pipe）
+    *UNIX信号量（semaphore）
+    *UNIX共享内存（shared memory）
+    *UNIX消息队列（message queue）
+    *UNIX套接字（Socket）
+
+
