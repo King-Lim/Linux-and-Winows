@@ -443,4 +443,25 @@ linux创建文件可直接通过文件编辑器vi/vim创建
     *UNIX消息队列（message queue）
     *UNIX套接字（Socket）
 
+33.linux网络设定相关档案
+  */etc/sysconfig/network
+    设置network是否启用
+    设置hostname名
+    设置完成，设备重启后生效
+  */etc/sysconfig/network-script/ifcfg-eth*
+    设定网卡参数文件（IP地址、子网掩码、IP取得方式等）
+    设置完成，网卡重启后生效
+  */etc/resolve.conf
+    设定DNS相关参数
+  */etc/hosts
+    设定hostname对应的IP
+  */etc/services
+    该文件记录的TCP/IP总协议，包括各种服务（http、ftp、ssh等）所定义的端口号
+    如果需要自订一个新的协议与port对应，可以修改该文件
+  */etc/protocls
+    文件定义出IP封包协议的相关数据
+  */etc/init.d/network
+    可以重启所以网络参数的脚本，迅速恢复系统预设的参数值
+    【重启命令：/etc/init.d/network restart】
+
 
