@@ -108,5 +108,20 @@
     *scp总是安全的，而rsync必须通过ssh传输才安全；
     *如果传输大文件时，传输完成前连接，rsync会从中断处继续传输，而scp不会；
 
-
-
+6.curl命令详解
+    语法：curl [-option] url
+        常见参数：
+        -A/-user-agent：设置用户代理发送给服务器
+        -b/-cookie<neme=string/file>：cookie字符串或文件读取位置
+        -c/-cookie-jar：操作结束后把cookie写入到这个文件中
+        -C/-ontinue-at：断点续传
+        -D/-dump-header：把header信息写入到该文件中
+        -e/-referer：来源网址
+        -f/-fail：连接失败时不显示http错误
+        -o/-output：把输出写到该文件中
+        -O/-remote-name：把输出写到该文件中，保留远程文件的文件名
+        -r/-range：检索来自HTTP/1.1或FTP服务器字节范围
+        -s/-slient：不输出任何东西
+        -T/-upload-file：上传文件
+        -u/-user<user[password]>：设置服务器用户名和密码
+        -w/-write-out
