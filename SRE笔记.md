@@ -5515,20 +5515,73 @@ hello,world!
 
 只检测脚本中的语法错误，但无法检查出命令错误，但不真正执行脚本
 
-```
+```bash
 bash -n /path/to/some_script
 ```
 
 调试并执行
 
-```
+```bash
 bash -x /path/to/some_script
 ```
 
 **总结：脚本错误常见的有三种** 
 
 * 语法错误，会导致后续的命令不继续执行，可以用bash -n 检查错误，提示的出错行数不一定是准 确的 
-* 命令错误，默认后续的命令还会继续执行，用bash -n 无法检查出来 ，可以使用 bash -x 进行观察 
+
+```bash
+[root@sh-lzy-Centos8 11:53 data]#cat -n hello.sh 
+     1	#!/bin/bash
+     2	#Author:		lizuyan
+     3	#Date:			2022-04-11
+     4	
+     5	#********************************************
+     6	
+     7	echo "hello world!"
+     8	hostname
+     9	cat > /data/app.conf <<EOF
+    10	line1
+    11	line2
+    12	EOF 								#EOF必须单词结尾，后面有空格
+    13	
+    14	echo "Finished!"
+[root@sh-lzy-Centos8 11:53 data]#bash hello.sh 
+hello world!
+sh-lzy-Centos8.5
+hello.sh: line 14: warning: here-document at line 9 delimited by end-of-file (wanted `EOF')										
+[root@sh-lzy-Centos8 11:53 data]#bash -n hello.sh 
+hello.sh: line 14: warning: here-document at line 9 delimited by end-of-file (wanted `EOF')										#报错的行号不一定准确
+[root@sh-lzy-Centos8 11:53 data]#
+```
+
+* 命令错误，默认后续的命令还会继续执行，用bash -n 无法检查出来 ，可以使用 bash -x 进行观察
+
+```bash
+# 实例
+[root@sh-lzy-Centos8 11:40 data]#bash hello.sh 
+hello world!
+hello.sh: line 8: hotname: command not found
+Finished!
+[root@sh-lzy-Centos8 11:40 data]#cat -n hello.sh 
+     1	#!/bin/bash
+     2	#Author:		lizuyan
+     3	#Date:			2022-04-11
+     4	
+     5	#********************************************
+     6	
+     7	echo "hello world!"
+     8	hotname
+     9	echo "Finished!"
+[root@sh-lzy-Centos8 11:41 data]#bash -x hello.sh 
++ echo 'hello world!'
+hello world!
++ hotname
+hello.sh: line 8: hotname: command not found
++ echo 'Finished!'
+Finished!
+[root@sh-lzy-Centos8 11:42 data]#
+```
+
 * 逻辑错误：只能使用 bash -x 进行观察
 
 #### 6.2.7 变量
@@ -5536,6 +5589,21 @@ bash -x /path/to/some_script
 ##### 6.2.7.1 变量
 
 变量表示命名的内存空间，将数据放在内存空间中，通过变量名引用，获取数据
+
+```bash
+#马哥实例
+[root@sh-lzy-Centos8 14:51 data]#curl -s http://www.wangxiaochun.com/testdir/system_info.sh |bash
+----------------------Host systeminfo--------------------
+HOSTNAME:     sh-lzy-Centos8.5
+IPADDR:       10.0.0.104 192.168.122.1 
+OSVERSION:    CentOS Linux 8
+KERNEL:       4.18.0-348.el8.x86_64
+CPU:          Intel(R) Core(TM) i7-9700K CPU @ 3.60GHz
+MEMORY:       3.6Gi
+DISK:         500G
+---------------------------------------------------------
+[root@sh-lzy-Centos8 15:08 data]#
+```
 
 ##### 6.2.7.2 变量类型
 
@@ -5645,6 +5713,43 @@ unset <name>
 
  1、编写脚本 systeminfo.sh，显示当前主机系统信息，包括:主机名，IPv4地址，操作系统版本，内核 版本，CPU型号，内存大小，硬盘大小
 
+```bash
+[root@sh-lzy-Centos8 20:15 data]#cat systeminfo.sh 
+#!/bin/bash
+#Author:		lizuyan
+#Date:			2022-04-11
+#Filename		hello.sh
+#Version		1.0
+
+#********************************************
+RED="\E[1;31m"
+GREEN="echo -e \E[1;32m"
+END="\E[0m"
+
+$GREEN----------------------------Host Systeminfo--------------------------------$END
+echo -e "HOSTNAME:	$RED`hostname`$END"
+echo -e "IPADDR:  	$RED`ifconfig ens160 |grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' |head -n1`$END"
+echo -e "IPADDR:  	$RED`hostname -I |awk '{print $1}'`$END"
+echo -e "OSVERSION:	$RED`cat /etc/redhat-release`$END"
+echo -e "KERNEL:  	$RED`uname -r`$END"
+echo -e "CPU:     	$RED`lscpu |grep -m1 "Model name" |cut -d : -f2 |tr -d " "`$END"
+echo -e "MEMORY:  	$RED`free -mhl |grep Mem |awk '{print $2}'`$END"
+echo -e "DISK:		$RED`lsblk |grep ^sd |awk '{print $4}'`$END"
+$GREEN---------------------------------------------------------------------------$END
+[root@sh-lzy-Centos8 20:16 data]#bash systeminfo.sh 
+----------------------------Host Systeminfo--------------------------------
+HOSTNAME:	sh-lzy-Centos8.5
+IPADDR:  	10.0.0.104
+IPADDR:  	10.0.0.104
+OSVERSION:	CentOS Linux release 8.5.2111
+KERNEL:  	4.18.0-348.el8.x86_64
+CPU:     	Intel(R)Core(TM)i7-9700KCPU@3.60GHz
+MEMORY:  	3.6Gi
+DISK:		500G
+---------------------------------------------------------------------------
+[root@sh-lzy-Centos8 20:16 data]#
+```
+
 2、编写脚本 backup.sh，可实现每日将 /etc/ 目录备份到 /backup/etcYYYY-mm-dd中 
 
 3、编写脚本 disk.sh，显示当前硬盘分区中空间利用率最大的值 
@@ -5745,6 +5850,48 @@ $* 传递给脚本的所有参数，全部参数合为一个字符串
 $@ 传递给脚本的所有参数，每个参数为独立字符串
 $# 传递给脚本的参数的个数
 注意：$@ $* 只在被双引号包起来的时候才会有差异
+```
+
+范例：
+
+```bash
+[root@sh-lzy-Centos8 19:56 script]#cat args.sh 
+#!/bin/bash
+#********************************************************
+#Author          :lizuyan
+#Email           :2920476223@qq.com
+#Create time     :2022-05-28 19:14
+#Filename        :args.sh
+#Discription     :
+#********************************************************
+echo 1st arg is $1
+echo 2st arg is $2
+echo 3st arg is $3
+echo 10st arg is ${20}
+
+echo All args is $*
+echo All args is $@
+
+echo The args number is $#
+echo The scriptname is $0
+[root@sh-lzy-Centos8 19:57 script]#./args.sh 
+1st arg is
+2st arg is
+3st arg is
+10st arg is
+All args is
+All args is
+The args number is 0
+The scriptname is ./args.sh
+[root@sh-lzy-Centos8 19:57 script]#./args.sh {a..z}
+1st arg is a
+2st arg is b
+3st arg is c
+10st arg is t
+All args is a b c d e f g h i j k l m n o p q r s t u v w x y z
+All args is a b c d e f g h i j k l m n o p q r s t u v w x y z
+The args number is 26
+The scriptname is ./args.sh
 ```
 
 清空所有位置变量
@@ -20170,4 +20317,4 @@ You can see the rules have been migrated from CentOS/RHEL 6 or 7 to CentOS/RHEL 
 
 7. 实现主机防火墙 放行telnet, ftp, web服务 放行samba服务 放行dns服务(查询和区域传送) 
 
-8. 实现网络防火墙 放行telnet, ftp, web服务 放行samba服务 放行dns服务(查询和区域传送)
+8. 实现网络防火墙 放行telnet, ftp, web服务 放行samba服务 放行dns服务(查询和区域传送)root
