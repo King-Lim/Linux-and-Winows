@@ -194,7 +194,3 @@
     *kill与killall
       kill：后面必须加上PID（或%jobnumber），所以kill经常搭配ps，pstree等指令使用；
       killall：将系统当中所有以某个指令名称启动的程序全部删除；
-      
-8.
-
-
